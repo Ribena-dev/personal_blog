@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title | default: site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&display=swap">
+  <link rel="stylesheet" href="{{ '/css/vendor/bootstrap.min.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===================== Header ===================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="wrap header-inner">
+      <a class="brand" href="{{ '/' | relative_url }}" aria-label="Quill — home">
+        <svg class="nib" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 21c4-1 6-2 9-5"></path>
+          <path d="M20.5 3.5c-1.8 6.5-6.2 10.9-12.7 12.7l1.5 1.5C15.8 15.9 20.2 11.5 22 5z"></path>
+          <path d="M8 16l-1-1"></path>
+        </svg>
+        Quill
+      </a>
+
+      <nav class="nav-primary" id="navPrimary" aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="{{ '/' | relative_url }}" aria-current="page">Essays</a></li>
+          <li><a href="{{ '/#topics' | relative_url }}">Topics</a></li>
+          <li><a href="{{ '/#about' | relative_url }}">About</a></li>
+          <li><a href="{{ '/#desk' | relative_url }}">The Desk</a></li>
+        </ul>
+        <a class="btn-ink nav-cta" href="{{ '/#subscribe' | relative_url }}">Subscribe</a>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navPrimary">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===================== Intro / About band ===================== -->
+    <!-- The bio paragraph below comes from your markdown file's content -->
+    <section class="intro" id="about" aria-labelledby="intro-title">
+      <div class="wrap intro-grid">
+        <div class="intro-copy reveal">
+          <p class="intro-hello">A writing journal · Since 2019</p>
+          <h1 id="intro-title">{{ page.title }}</h1>
+
+          <div class="intro-bio">
+            {{ content }}
+          </div>
+
+          <div class="intro-meta">
+            <span>{{ site.posts.size }} essays</span><span class="dot" aria-hidden="true"></span>
+            <span>~1,400 readers</span><span class="dot" aria-hidden="true"></span>
+            <span>No ads, no tracking</span>
+          </div>
+          <div class="intro-actions">
+            <a class="btn-ink" href="#essays">Read the latest
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn-line" href="#subscribe">Get the fortnightly letter</a>
+          </div>
+        </div>
+        <figure class="portrait reveal">
+          <img src="{{ '/img/author.jpg' | relative_url }}" alt="Portrait of Nora Ashby, the writer behind Quill" width="600" height="750" loading="eager">
+          <figcaption>Nora Ashby — Ghent, morning light</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===================== Recent essays ===================== -->
+    <!-- Loops over every file in _posts — add a new post there and it -->
+    <!-- shows up here automatically, no HTML editing needed.          -->
+    <section class="section" id="essays" aria-labelledby="essays-title">
+      <div class="wrap">
+        <div class="essays-head reveal">
+          <h2 id="essays-title">Recent essays</h2>
+          <span class="count">Updated {{ site.posts.first.date | date: "%-d %B %Y" }}</span>
+        </div>
+
+        <ol class="essay-list">
+          {% for post in site.posts %}
+          <li class="essay reveal">
+            <div class="essay-top">
+              <span class="folio">{{ "%02d" | format: forloop.rindex }}</span>
+              <h3 class="essay-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+              <span class="leader" aria-hidden="true"></span>
+              <span class="essay-meta">{{ post.date | date: "%-d %b %Y" }} · {{ post.read_time | default: "5 min" }}</span>
+            </div>
+            <p class="essay-excerpt">{{ post.excerpt | strip_html }}</p>
+            <div class="essay-tags">
+              {% for tag in post.tags %}<a class="tag" href="{{ '/#topics' | relative_url }}">{{ tag }}</a>{% endfor %}
+            </div>
+          </li>
+          {% endfor %}
+        </ol>
+
+        <div class="essays-more reveal">
+          <a class="textlink" href="{{ '/archive/' | relative_url }}">Browse the full archive — all {{ site.posts.size }} essays
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Featured essay ===================== -->
+    <!-- Shows whichever post has "featured: true" in its front matter, -->
+    <!-- falling back to the most recent post.                          -->
+    {% assign featured = site.posts | where: "featured", true | first %}
+    {% if featured == nil %}{% assign featured = site.posts.first %}{% endif %}
+    {% if featured %}
+    <section class="section featured" aria-labelledby="featured-title">
+      <div class="wrap featured-grid">
+        <figure class="featured-figure reveal">
+          <img src="{{ featured.image | default: '/img/featured.jpg' | relative_url }}" alt="{{ featured.image_alt | default: 'Featured essay image' }}" width="1280" height="800" loading="lazy">
+        </figure>
+        <div class="featured-body reveal">
+          <p class="kicker">Essay of the month</p>
+          <h3 id="featured-title"><a href="{{ featured.url | relative_url }}">{{ featured.title }}</a></h3>
+          <p class="byline">By Nora Ashby · {{ featured.date | date: "%-d %B %Y" }} · {{ featured.read_time | default: "5 min" }} read</p>
+          {% if featured.quote %}
+          <blockquote class="featured-quote">{{ featured.quote }}</blockquote>
+          {% endif %}
+          <p>{{ featured.excerpt | strip_html }}</p>
+          <a class="textlink" href="{{ featured.url | relative_url }}">Continue reading
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- ===================== Topics ===================== -->
+    <!-- Static for now — edit topic names/counts/descriptions by hand. -->
+    <section class="section" id="topics" aria-labelledby="topics-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="kicker">Fields of interest</p>
+          <h2 id="topics-title">Topics I keep returning to</h2>
+          <p class="lede">Everything here sorts, more or less, into six preoccupations.</p>
+        </div>
+        <div class="topics-grid reveal">
+          <a class="topic" href="#essays">
+            <div class="topic-top"><h3>Craft</h3><span class="n">38 essays</span></div>
+            <p>Sentences, revision, structure, and the long apprenticeship of learning to say a true thing plainly.</p>
+          </a>
+          <a class="topic" href="#essays">
+            <div class="topic-top"><h3>Attention</h3><span class="n">27 essays</span></div>
+            <p>Noticing on purpose. On focus, distraction, and the small disciplines that keep the mind in one place.</p>
+          </a>
+          <a class="topic" href="#essays">
+            <div class="topic-top"><h3>Reading</h3><span class="n">31 essays</span></div>
+            <p>Rereading, marginalia, and the books that stay in the room long after they've been shelved.</p>
+          </a>
+          <a class="topic" href="#essays">
+            <div class="topic-top"><h3>Mornings</h3><span class="n">19 essays</span></div>
+            <p>The first hour, the moka pot, and why the day is decided before it properly begins.</p>
+          </a>
+          <a class="topic" href="#essays">
+            <div class="topic-top"><h3>Notebooks</h3><span class="n">15 essays</span></div>
+            <p>Commonplace books, index cards, and keeping a paper memory in a screen-shaped century.</p>
+          </a>
+          <a class="topic" href="#essays">
+            <div class="topic-top"><h3>Place</h3><span class="n">12 essays</span></div>
+            <p>Desks, rooms, cities and light. How where you write quietly rewrites what you write.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== On the desk ===================== -->
+    <!-- Static — edit the reading list by hand. -->
+    <section class="section desk" id="desk" aria-labelledby="desk-title">
+      <div class="wrap desk-grid">
+        <div class="desk-copy reveal">
+          <p class="kicker">On the desk this month</p>
+          <h2 id="desk-title">A narrow table, a moka pot, and a short stack of books.</h2>
+          <p class="desk-note">
+            Quill is written in the hour before the house wakes, at a <strong>plain oak desk facing a plaster wall</strong>,
+            with a moka pot doing its slow work in the next room. No dual monitors, no dashboard —
+            just a lamp, a fountain pen, and whatever I'm reading at the moment.
+          </p>
+          <p class="eyebrow" style="margin-bottom:.9rem;">Currently reading</p>
+          <ul class="reading-list">
+            <li><span class="book book-italic">The Rings of Saturn</span><span class="who">W. G. Sebald</span></li>
+            <li><span class="book book-italic">The Situation and the Story</span><span class="who">Vivian Gornick</span></li>
+            <li><span class="book book-italic">Pilgrim at Tinker Creek</span><span class="who">Annie Dillard</span></li>
+            <li><span class="book book-italic">Bird by Bird</span><span class="who">Anne Lamott</span></li>
+            <li><span class="book book-italic">Letters to a Young Poet</span><span class="who">Rainer Maria Rilke</span></li>
+          </ul>
+        </div>
+        <figure class="desk-figure reveal">
+          <img src="{{ '/img/desk.jpg' | relative_url }}" alt="A quiet writing desk with an open notebook, fountain pen and a cup of coffee in morning light" width="1280" height="880" loading="lazy">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===================== Newsletter ===================== -->
+    <section class="section subscribe" id="subscribe" aria-labelledby="sub-title">
+      <div class="wrap reveal">
+        <p class="kicker">The Margin — a fortnightly letter</p>
+        <h2 id="sub-title">One essay, a few lines about what I'm reading, <em>and nothing else.</em></h2>
+        <p>Every other Sunday I send a short letter: the new essay, two or three sentences on a book that's stayed with me, and no housekeeping in between. Around 1,400 readers. No tracking pixels, unsubscribe with one click.</p>
+        <form class="sub-form" id="subForm" novalidate>
+          <label class="visually-hidden" for="subEmail">Email address</label>
+          <input type="email" id="subEmail" name="email" placeholder="you@example.com" autocomplete="email" required aria-describedby="subMsg">
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="sub-note">Free forever. Read a back issue before you decide.</p>
+        <p class="form-msg" id="subMsg" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== Footer ===================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="{{ '/' | relative_url }}" aria-label="Quill — home">
+            <svg class="nib" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 21c4-1 6-2 9-5"></path>
+              <path d="M20.5 3.5c-1.8 6.5-6.2 10.9-12.7 12.7l1.5 1.5C15.8 15.9 20.2 11.5 22 5z"></path>
+              <path d="M8 16l-1-1"></path>
+            </svg>
+            Quill
+          </a>
+          <p class="footer-colophon">
+            A personal writing journal by Nora Ashby, published from a narrow studio in Ghent.
+            Set in <em>Newsreader</em> and <em>Hanken Grotesk</em>. Written slowly, on purpose.
+          </p>
+          <div class="footer-social">
+            <a href="#subscribe" aria-label="Subscribe by RSS">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="19" r="1.6"/><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/></svg>
+            </a>
+            <a href="#subscribe" aria-label="Write to Nora by email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            </a>
+            <a href="#subscribe" aria-label="Follow on Mastodon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13c0 3-2.5 4-4.5 4.2-2.4.3-5 .1-7.5-.7"/><path d="M8 14v-4.5A2.5 2.5 0 0 1 12 8a2.5 2.5 0 0 1 4 1.5V14"/></svg>
+            </a>
+            <a href="#subscribe" aria-label="Follow on Bluesky">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10.8C10.9 8.6 7.9 4.9 5.2 3.6 3.9 3 2 2.7 2 4.8c0 .9.5 6 1 6.9.6 1.3 2 1.7 3.3 1.5-2 .3-3.8 1.1-1.5 3.6 2.6 2.7 3.6-1 4.1-2.5.2-.6.3-.9.4-.9s.2.3.4.9c.5 1.5 1.5 5.2 4.1 2.5 2.3-2.5.5-3.3-1.5-3.6 1.3.2 2.7-.2 3.3-1.5.5-.9 1-6 1-6.9 0-2.1-1.9-1.8-3.2-1.2C16.1 4.9 13.1 8.6 12 10.8Z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Read</h4>
+          <ul>
+            <li><a href="#essays">Latest essays</a></li>
+            <li><a href="{{ '/archive/' | relative_url }}">The archive</a></li>
+            <li><a href="#topics">Topics</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>About</h4>
+          <ul>
+            <li><a href="#about">Who writes this</a></li>
+            <li><a href="#desk">The desk</a></li>
+            <li><a href="#desk">Now reading</a></li>
+            <li><a href="#subscribe">Say hello</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>The Margin</h4>
+          <ul>
+            <li><a href="#subscribe">Subscribe</a></li>
+            <li><a href="#subscribe">Back issues</a></li>
+            <li><a href="#subscribe">RSS feed</a></li>
+            <li><a href="#subscribe">Privacy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; {{ site.time | date: "%Y" }} Quill · Written by Nora Ashby · Free template by uiCookies</p>
+        <a class="to-top" href="#siteHeader">Back to top
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="to-top-float" id="toTop" aria-label="Back to top" hidden>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+  </button>
+
+  <script src="{{ '/js/vendor/bootstrap.bundle.min.js' | relative_url }}"></script>
+  <script src="{{ '/js/main.js' | relative_url }}"></script>
+</body>
+</html>
