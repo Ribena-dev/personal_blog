@@ -64,12 +64,13 @@
       <div class="wrap">
         <h2>Writing</h2>
         <ul class="post-list">
-          {% assign writing = site.posts | where_exp: "p", "p.tags contains 'project' == false" %}
-          {% for post in writing %}
-          <li>
-            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-            <span class="post-date">{{ post.date | date: "%-d %b %Y" }}</span>
-          </li>
+          {% for post in site.posts %}
+            {% unless post.tags contains 'project' %}
+            <li>
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+              <span class="post-date">{{ post.date | date: "%-d %b %Y" }}</span>
+            </li>
+            {% endunless %}
           {% endfor %}
         </ul>
       </div>
