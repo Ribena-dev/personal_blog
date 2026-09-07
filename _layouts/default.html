@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title }} | Personal blog (tempt title)</title>
-  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/main.css">
   <script>
   MathJax = {
     tex: {
@@ -18,21 +18,15 @@
 <body>
 
   <nav class="site-nav">
-    <div class="nav-inner">
-      <!--<a class="nav-title" href="/">CDE4301 IS434</a>
-      <div class="nav-links">
-        <a href="/notes/report/Introduction"     {% if page.url contains 'Introduction'  %}class="active"{% endif %}>1. Introduction</a>
-        <a href="/notes/report/Methology"        {% if page.url contains 'Methology'     %}class="active"{% endif %}>2. Methodology</a>
-        <a href="/notes/report/Fabrication"      {% if page.url contains 'Fabrication'   %}class="active"{% endif %}>3. Fabrication</a>
-        <a href="/notes/report/fna"              {% if page.url contains 'fna'           %}class="active"{% endif %}>4. Results</a>
-	<a href="/notes/report/FW"               {% if page.url contains 'FW'            %}class="active"{% endif %}>5. Future Work</a> --!>
-      </div>
-    </div>
+   
   </nav>
 
   <main class="page-content">
     {{ content }}
   </main>
+  <footer>
+      © {{ 'now' | date: "%Y" }} Devinaa Kumeresh .
+  </footer>
 
 </body>
 </html>
