@@ -1,6 +1,6 @@
 ---
 layout : index_layout
-title: intro
+title: landing page
 ---
 ## personal blog
 
