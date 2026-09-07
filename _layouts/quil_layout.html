@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title | default: site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/index_layout.css">
+</head>
+<body>
+
+  <!-- ===================== Header ===================== -->
+  <header class="cover-header">
+    <div class="wrap">
+      <a class="brand" href="{{'/' | relative_url }}">{{ site.title }}</a>
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#posts">Writing</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===================== Hero ===================== -->
+    <section class="hero wrap">
+      <p class="eyebrow">{{ page.role | default: "" }}</p>
+      <h1>{{ page.title }}</h1>
+      <div class="hero-bio">
+        {{ content }}
+      </div>
+      <div class="hero-stack">
+        {% for tech in page.stack %}<span class="pill">{{ tech }}</span>{% endfor %}
+      </div>
+    </section>
+
+    <!-- ===================== Featured projects ===================== -->
+    <!-- Pulls posts tagged "project" — tag any post with `tags: [project]` -->
+    <section class="section" id="projects">
+      <div class="wrap">
+        <h2>Projects</h2>
+        <div class="project-grid">
+          {% assign projects = site.posts | where_exp: "p", "p.tags contains 'project'" %}
+          {% for project in projects %}
+          <a class="project-card" href="{{ project.url | relative_url }}">
+            <h3>{{ project.title }}</h3>
+            <p>{{ project.excerpt | strip_html }}</p>
+            {% if project.tech %}
+            <div class="tech-tags">
+              {% for t in project.tech %}<span class="tag">{{ t }}</span>{% endfor %}
+            </div>
+            {% endif %}
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Recent writing ===================== -->
+    <!-- Pulls posts NOT tagged "project" -->
+    <section class="section" id="posts">
+      <div class="wrap">
+        <h2>Writing</h2>
+        <ul class="post-list">
+          {% for post in site.posts %}
+            {% unless post.tags contains 'project' %}
+            <li>
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+              <span class="post-date">{{ post.date | date: "%-d %b %Y" }}</span>
+            </li>
+            {% endunless %}
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== Contact ===================== -->
+  <footer class="cover-footer" id="contact">
+    <div class="wrap">
+      <p>
+        <a href="mailto:{{ site.email }}">{{ site.email }}</a> ·
+        <a href="{{ site.github }}">GitHub</a> ·
+        <a href="{{ site.linkedin }}">LinkedIn</a>
+      </p>
+      <p class="copyright">&copy; {{ site.time | date: "%Y" }} {{ site.title }}</p>
+    </div>
+  </footer>
+
+</body>
+</html>
