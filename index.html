@@ -4,7 +4,7 @@ title: landing page
 ---
 <header class="hero">
   <div class="wrap">
-    <h1>Hi, I'm Devinaa 👋</h1>
+    <h1>Hi, I'm Devinaa</h1>
     <p>
         small intro about myself
     </p>
@@ -18,10 +18,10 @@ title: landing page
 
 <section class="work" id="work">
   <div class="wrap">
-    <h2 class="eyebrow">Case studies</h2>
+    <h2 class="eyebrow">projects</h2>
 
     {% for post in site.posts %}
-    <a class="case" href="{{ post.url | relative_url }}">
+    <a class="case" href="./_posts">
       <div class="tag">{{ post.tag }}</div>
       <h3>{{ post.title }}</h3>
       <p>{{ post.summary }}</p>
