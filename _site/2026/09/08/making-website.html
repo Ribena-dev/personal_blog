@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title }} | Personal blog (tempt title)</title>
+  <title>Making a personal blog | Personal blog (tempt title)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ './assets/css/index_layout.css' }}">
+  <link rel="stylesheet" href="./assets/css/index_layout.css">
   <script>
   MathJax = {
     tex: {
@@ -21,21 +21,29 @@
 <body>
   <nav>
     <div class="wrap">
-      <!-- <a class="name" href="{{ '/' | relative_url }}">Your Name</a> -->
+      <!-- <a class="name" href="/">Your Name</a> -->
       <span class="links">
-        <a href="{{ './pages/posts_page' }}">Projects</a>  
+        <a href="./pages/posts_page">Projects</a>  
         <!--  to add in another site page for full list of projects -->
-        <a href="{{ '/#contact'}}">Contact</a>
+        <a href="/#contact">Contact</a>
         <!-- later add in link tree -->
       </span>
     </div>
   </nav>
 
   <main class="page-content">
-    {{ content }}
+    <article class="wrap post">
+  <a class="back" href="/#work">&larr; Back to work</a>
+  <div class="tag">Jekyll, nixos</div>
+  <h1>Making a personal blog</h1>
+  <div class="post-body">
+    
+
+  </div>
+</article>
   </main>
   <footer>
-      © {{ 'now' | date: "%Y" }} Devinaa Kumeresh .
+      © 2026 Devinaa Kumeresh .
   </footer>
 
 </body>

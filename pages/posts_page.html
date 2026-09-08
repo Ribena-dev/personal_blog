@@ -1,0 +1,18 @@
+---
+layout : pages_layout
+title: post page
+---
+<section class="posts" id="posts">
+  <div class="wrap">
+    <h2 >Projects</h2>
+    {% for post in site.posts%}
+    <a class="case" href="{{post.url | relative_url}}">
+      <h3>{{ post.title }}</h3>
+      <p>{{ post.summary }}</p>
+      <div class="tag">{{ post.tag }}</div>
+      <span class="cta">View project</span>
+    </a>>
+    {% endfor %}
+
+  </div>
+</section>

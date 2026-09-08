@@ -4,9 +4,10 @@ title: landing page
 ---
 <header class="hero">
   <div class="wrap">
-    <h1>Hi, I'm Devinaa</h1>
+    <h1>Musings~</h1>
     <p>
-        small intro about myself
+        small intro about the page-content
+        a personal page to list all the random side quests 
     </p>
     <p> another small tag on</p>
     <div class="status">
@@ -18,18 +19,15 @@ title: landing page
 
 <section class="work" id="work">
   <div class="wrap">
-    <h2 >Projects</h2>
+    <h2> Latest Projects</h2>
 
-    {% for post in site.posts %}
-    <!-- <a class="case" href="{{'./_posts'}}">
+    {% for post in site.posts limit:3%}
+    <a class="case" href="{{post.url | relative_url}}">
       <div class="tag">{{ post.tag }}</div>
       <h3>{{ post.title }}</h3>
       <p>{{ post.summary }}</p>
-      <span class="cta">View projects</span>
-    </a> -->
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
+      <span class="cta">View project</span>
+    </a>>
     {% endfor %}
 
   </div>
