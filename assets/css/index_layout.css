@@ -5,7 +5,7 @@
     --ink-soft: #57534B;
     --accent: #3D5A4C;   /* muted forest green */
     --line: #DEDACF;
-    --max-width: 640px;
+    --max-width: 900px;
   }
 
   * { box-sizing: border-box; }
