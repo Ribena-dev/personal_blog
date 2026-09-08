@@ -1,0 +1,255 @@
+/* ---------- Design tokens ---------- */
+  :root {
+    --bg: #F7F5F0;
+    --ink: #1E1C19;
+    --ink-soft: #57534B;
+    --accent: #3D5A4C;   /* muted forest green */
+    --line: #DEDACF;
+    --max-width: 640px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, .display {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .wrap {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Nav ---------- */
+  nav {
+    padding: 28px 0;
+  }
+  nav .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav .name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+  nav .links a {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin-left: 24px;
+    transition: color 0.15s ease;
+  }
+  nav .links a:hover { color: var(--ink); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 60px 0 72px;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: rise 0.7s ease forwards;
+  }
+  @keyframes rise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero h1 {
+    font-size: clamp(1.9rem, 4.5vw, 2.5rem);
+    line-height: 1.25;
+  }
+  .hero p {
+    margin-top: 20px;
+    color: var(--ink-soft);
+    max-width: 52ch;
+  }
+  .hero .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 28px;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+  .status .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* ---------- Proof line ---------- */
+  .proof {
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+  .proof a {
+    color: var(--accent);
+    border-bottom: 1px solid currentColor;
+  }
+
+  /* ---------- Work section ---------- */
+  .work {
+    padding: 64px 0;
+  }
+  .work h2.eyebrow {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin-bottom: 36px;
+  }
+
+  .case {
+    display: block;
+    padding: 28px 0;
+    border-top: 1px solid var(--line);
+  }
+  .case:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  .case .tag {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+  .case h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin: 8px 0 6px;
+    transition: color 0.15s ease;
+  }
+  .case p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+  }
+  .case .cta {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 0.92rem;
+    color: var(--accent);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+  .case:hover h3 { color: var(--accent); }
+  .case:hover .cta { border-color: var(--accent); }
+
+  /* ---------- Closing CTA ---------- */
+  .closing {
+    padding: 72px 0 96px;
+  }
+  .closing h2 {
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+  }
+  .closing p {
+    margin-top: 14px;
+    color: var(--ink-soft);
+  }
+  .closing .email {
+    display: inline-block;
+    margin-top: 24px;
+    font-size: 1.05rem;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+
+  footer {
+    padding: 24px 0 48px;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+
+  /* ---------- Accessibility & motion ---------- */
+  a:focus-visible, .case:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero { animation: none; opacity: 1; transform: none; }
+  }
+
+  @media (max-width: 480px) {
+    nav .links a { margin-left: 16px; font-size: 0.88rem; }
+  }
+
+  /* ---------- Individual post page ---------- */
+  .post {
+    padding: 40px 0 96px;
+  }
+  .post .back {
+    display: inline-block;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    margin-bottom: 24px;
+  }
+  .post .back:hover { color: var(--accent); }
+  .post h1 {
+    font-size: clamp(1.7rem, 4vw, 2.2rem);
+    margin: 10px 0 28px;
+    line-height: 1.3;
+  }
+  .post-body {
+    color: var(--ink);
+  }
+  .post-body h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    margin: 36px 0 12px;
+  }
+  .post-body p, .post-body li {
+    color: var(--ink-soft);
+  }
+  .post-body ul {
+    padding-left: 20px;
+  }
+
+  /* ---------- Individual post page ---------- */
+  .post {
+    padding: 40px 0 96px;
+  }
+  .post .back {
+    display: inline-block;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    margin-bottom: 24px;
+  }
+  .post .back:hover { color: var(--accent); }
+  .post h1 {
+    font-size: clamp(1.7rem, 4vw, 2.2rem);
+    margin: 10px 0 28px;
+    line-height: 1.3;
+  }
+  .post-body {
+    color: var(--ink);
+  }
+  .post-body h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    margin: 36px 0 12px;
+  }
+  .post-body p, .post-body li {
+    color: var(--ink-soft);
+  }
+  .post-body ul {
+    padding-left: 20px;
+  }

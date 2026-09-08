@@ -21,12 +21,15 @@ title: landing page
     <h2 >Projects</h2>
 
     {% for post in site.posts %}
-    <a class="case" href="{{'./_posts'}}">
+    <!-- <a class="case" href="{{'./_posts'}}">
       <div class="tag">{{ post.tag }}</div>
       <h3>{{ post.title }}</h3>
       <p>{{ post.summary }}</p>
       <span class="cta">View projects</span>
-    </a>
+    </a> -->
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
     {% endfor %}
 
   </div>
